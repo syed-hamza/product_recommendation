@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Enable CORS for all routes
 CORS(app)
 correlation_matrix = pd.read_csv("Data/correlation_matrix.csv")
-product_path = "Data/products.csv"
+product_path = "Data/home.csv"
 
 def top_5_products(correlation_matrix,product_ID):
     prod_corr =correlation_matrix[product_ID].values

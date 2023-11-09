@@ -15,17 +15,6 @@ def index():
     products = products_json['products']
     return render_template('index.html', products=products)
 
-@app.route('/fashion')
-def fashion_page():
-    return render_template('fashion.html')
-
-@app.route('/electronic')
-def electronic_page():
-    return render_template('electronic.html')
-
-@app.route('/jewellery')
-def jewellery_page():
-    return render_template('jewellery.html')
 
 @app.route('/profile')
 def profile_page():
@@ -39,10 +28,10 @@ def login_page():
 def signup_page():
     return render_template('signup.html')
 
-@app.route('/product/:id')
-def product_page():
+@app.route('/product/<int:id>')
+def product_page(id):
     recommended = get_recommendation(id) 
-    return render_template('product.html',id =id,recommended = recommended)
+    return render_template('product.html', id=id, recommended=recommended)
 
 if __name__ == '__main__':
     app.run(debug=True)
