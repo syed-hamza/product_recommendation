@@ -1,6 +1,6 @@
 
 async function start() {
-    var link = "http://192.168.0.183:5000"
+    var link = await geturl();
     var element= document.getElementById('data');
     var productid = element.getAttribute('productid');
     add_product_details(productid,link);
@@ -10,6 +10,14 @@ async function start() {
     .then(recommended => {
         add_recommendations(recommended,link);
     });
+}
+async function geturl(){
+    var url = await fetch("http://127.0.0.1:5000/server")
+              .then(response => response.json())
+              .then(response=>{
+                return response.ip;
+              })
+    return url
 }
 function get_product_block(data){
     return `

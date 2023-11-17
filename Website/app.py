@@ -3,10 +3,14 @@ import requests
 import pymysql 
 app = Flask(__name__)
 <<<<<<< HEAD
+<<<<<<< HEAD
 server_ip = "http://192.168.0.185:5000"
 =======
 server_ip = "http://192.168.0.183:5000"
 >>>>>>> 297005f0effb15a8213d641722267e38badc08e4
+=======
+server_ip = "http://10.30.203.231:5000"
+>>>>>>> 82b0f58bb6e2c3c3b999c23e1a4dfb81f000c681
 
 connection = pymysql.connect(
     host='localhost',
@@ -63,6 +67,10 @@ def cart_page():
 @app.route('/product/<int:id>')
 def product_page(id):
     return render_template('product.html', id=id)
+
+@app.route('/server', methods=['GET'])
+def get_server():
+        return jsonify({'ip': server_ip})
 
 @app.route('/sqlquery/<query>', methods=['GET'])
 def execute_sql_query(query):

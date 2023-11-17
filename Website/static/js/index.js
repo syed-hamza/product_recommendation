@@ -1,12 +1,20 @@
-url = "http://192.168.0.183:5000"
 async function start() {
-
+    url = await geturl();
+    console.log(url);
     fetch(`${url}/products`)
     .then(response => response.json())
     .then(data => {
         products_data = data.products
         generateTables(products_data);
     });
+}
+async function geturl(){
+    var url = await fetch("http://127.0.0.1:5000/server")
+              .then(response => response.json())
+              .then(response=>{
+                return response.ip;
+              })
+    return url
 }
 function make_block(product){
 return `<div class="box_main">
@@ -25,7 +33,7 @@ return `<div class="box_main">
 function generateTables(products){
     place_holder = document.getElementById("clothing");
     for(i in products){
-        console.log(products[i]);
+        //console.log(products[i]);
         const code = make_block(products[i]);
         const col = document.createElement('div');
         col.className = "col-lg-4 col-sm-4"; // Adjust the column size as per your layout needs (e.g., col-md-4 for 3 columns in a row)

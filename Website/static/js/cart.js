@@ -21,7 +21,7 @@ const categories = [...new Set(product.map((item)=>
     {return item}))];
 =======
 async function get_product(){
-    link = "http://192.168.0.183:5000"
+    link = await geturl()
     var cart_prod = await getCart();
     var products = []
     for(i in cart_prod){
@@ -30,6 +30,14 @@ async function get_product(){
         products.push(product[0])
     }
     return products
+}
+async function geturl(){
+    var url = await fetch("http://127.0.0.1:5000/server")
+              .then(response => response.json())
+              .then(response=>{
+                return response.ip;
+              })
+    return url
 }
 async function fetchSQLResults(query) {
     const url = `http://127.0.0.1:5000/sqlquery/${query}`;
@@ -47,8 +55,10 @@ async function fetchSQLResults(query) {
   }
 >>>>>>> 297005f0effb15a8213d641722267e38badc08e4
 
-function delElement(a){
-    categories.splice(a,1);
+async function delElement(id){
+    query = `delete from cart where product_id = ${id}`
+    var results = await fetchSQLResults(query);
+    console.log(results)
     displaycart();
 <<<<<<< HEAD
 }    
@@ -179,7 +189,8 @@ function cancelOrder(index) {
                             <td width="360"><p style='font-size:15px;'>${product_name}</p></td>
                             <td width="150"><h2 style='font-size:15px;
             color:black;' >$ ${price}.00 </h2></td>
-                            <td width="70">`+"<i class='fa-solid fa-trash'onclick='delElement("+(j++) +")'></i></td>"+
+                            <td width="70">`+
+                            `<i class='fa-solid fa-trash' onclick='delElement(${product_ID})'></i></td>`+
                             `</tr>`
         );
 
