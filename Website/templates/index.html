@@ -67,22 +67,14 @@
          <div class="header_section">
             <div class="container">
                <div class="containt_main">
-                  <div id="mySidenav" class="sidenav">
-                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                     <a href="/">Home</a>
-                     <a href="/fashion">Fashion</a>
-                     <a href="/electronic">Footwear</a>
-                     <a href="/jewellery">Bag</a>
-                     
-                  </div>
-                  <span class="toggle_icon" onclick="openNav()"><img src="{{ url_for('static', filename='images/toggle-icon.png') }}"></span>
+   
                   <div class="dropdown">
                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
                      </button>
                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Western</a>
+                        <a class="dropdown-item" href="#">Indian Wear</a>
+                        <a class="dropdown-item" href="#">Accessories</a>
                      </div>
                   </div>
                   <div class="main">
@@ -110,14 +102,15 @@
                      </div>
                      <div class="login_menu">
                         <ul>
-                           <li><a href="#">
+                           <li><a href="/cart">
                               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                               <span class="padding_10">Cart</span></a>
                            </li>
-                           <li><a href="#">
-                              <i class="fa fa-user" aria-hidden="true"></i>
-                              <span class="padding_10">Profile</span></a>
+                           <li><a href="/orders">
+                              <i class="fa fa-cube" aria-hidden="true"></i>
+                              <span class="padding_10">Orders</span></a>
                            </li>
+                           
                         </ul>
                      </div>
                   </div>
@@ -134,7 +127,9 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">Your Favorite Designs</br>Are Here</h1>
-                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                              <div class="buynow_bt">
+                                 <a href="/login">Login</a>
+                                 <a href="/signup">Sign Up</a></div>
                            </div>
                         </div>
                      </div>
@@ -142,7 +137,10 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">50% Off</br>On Your First Order</h1>
-                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                              <div class="buynow_bt">
+                                 <a href="/login">Login</a>
+                                 <a href="/signup">Sign Up</a></div>
+                           </div>
                            </div>
                         </div>
                      </div>
@@ -150,7 +148,7 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">Quality Products</br>At Affordable Rates</h1>
-                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                              
                            </div>
                         </div>
                   </div>
@@ -167,6 +165,20 @@
       </div>
       <!-- banner bg main end -->
       <!-- fashion section start -->
+      <div class="fashion_section">
+         <div id="main_slider" class="carousel slide" data-ride="carousel">
+             <div class="carousel-inner">
+                 <div class="carousel-item active">
+                     <div class="container">
+                         <h1 class="fashion_taital">Men Fashion</h1>
+                         <div class="fashion_section_2">
+                             <div class="row" id = "clothing"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+         </div>
+      </div>
       <div class="fashion_section">
          <div id="main_slider" class="carousel slide" data-ride="carousel">
              <div class="carousel-inner">
