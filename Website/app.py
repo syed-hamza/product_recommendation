@@ -2,7 +2,7 @@ from flask import Flask, render_template,jsonify
 import requests
 import pymysql 
 app = Flask(__name__)
-server_ip = "http://192.168.0.183:5000"
+server_ip = "http://10.30.203.231:5000"
 
 connection = pymysql.connect(
     host='localhost',
@@ -36,6 +36,10 @@ def cart_page():
 @app.route('/product/<int:id>')
 def product_page(id):
     return render_template('product.html', id=id)
+
+@app.route('/server', methods=['GET'])
+def get_server():
+        return jsonify({'ip': server_ip})
 
 @app.route('/sqlquery/<query>', methods=['GET'])
 def execute_sql_query(query):

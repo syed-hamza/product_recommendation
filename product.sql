@@ -14,6 +14,4 @@ CREATE TABLE IF NOT EXISTS cart (
 );
 -- Inserting rows into the 'cart' table
 INSERT INTO cart (user_id, product_id) VALUES
-    (1, 101), -- User 1 adds Product 101 to their cart
-    (2, 102), -- User 2 adds Product 102 to their cart
-    (1, 103); -- User 1 adds Product 103 to their cart
+    (1, 101); -- User 1 adds Product 103 to their cart
