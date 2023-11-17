@@ -1,4 +1,4 @@
---------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
+
 /*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
 
 @import url(animate.min.css);
@@ -444,18 +444,18 @@ button {
 .login_menu li {
     float: left;
     font-size: 16px;
-    color: #ffffff;
+    color:#fff;
     text-transform: uppercase;
     padding-left: 10px;
     padding-top: 4px;
 }
 
 .login_menu li a {
-    color: #ffffff;
+    color: white;
 }
 
 .login_menu li a:hover {
-    color: #d6739f;
+    color: black;
 }
 
 .padding_10 {
@@ -511,6 +511,11 @@ a:hover {
     width: 170px;
     margin: 0 auto;
     padding-top: 30px;
+    display: flex;
+}
+
+.buynow_bt a:last-child {
+    margin-left: 10px;
 }
 
 .buynow_bt a {
