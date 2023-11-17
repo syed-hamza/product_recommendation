@@ -52,8 +52,6 @@ function promo(){
 async function displaycart(c){
     let j=0, total =0;
     var products = await get_product()
-    console.log("______________________________")
-    console.log(products)
     document.getElementById("itemA").innerHTML = products.length + "Items";
     document.getElementById("itemB").innerHTML = products.length + "Items";
     if(products.length==0){
@@ -102,6 +100,5 @@ async function get_product_details(productid,link){
     });
 }
 
-getCart();
 displaycart();
 
