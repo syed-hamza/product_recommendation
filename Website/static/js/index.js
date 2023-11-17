@@ -1,4 +1,4 @@
-url = "http://10.20.203.86:5000"
+url = "http://192.168.0.183:5000"
 async function start() {
 
     fetch(`${url}/products`)

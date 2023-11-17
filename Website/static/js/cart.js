@@ -1,23 +1,28 @@
-const product =[
-    {
-        image: "product_recommendation/Website/static/product_images/Peacoat.jpg",
-        title: "Pea-Coat",
-        price: 120
-    },
-    {
-        image: "product_recommendation/Website/static/product_images/Slim-fit.jpg",
-        title: "Slimfit jeans",
-        price: 120
-    },
-    {
-        image: "product_recommendation/Website/static/product_images/Polo.jpg",
-        title: "Polo Shirt",
-        price: 120
+async function get_product(){
+    link = "http://192.168.0.183:5000"
+    var cart_prod = await getCart();
+    var products = []
+    for(i in cart_prod){
+        var id = cart_prod[i].product_id;
+        var product = await get_product_details(id,link);
+        products.push(product[0])
     }
-]
-
-const categories = [...new Set(product.map((item)=>
-    {return item}))];
+    return products
+}
+async function fetchSQLResults(query) {
+    const url = `http://127.0.0.1:5000/sqlquery/${query}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Error fetching data from the database');
+      }
+      const results = await response.json();
+      return results;
+    } catch (error) {
+      console.error('Error fetching data from the database:', error);
+      return { error: 'Error fetching data from the database' };
+    }
+  }
 
 function delElement(a){
     categories.splice(a,1);
@@ -34,19 +39,22 @@ function promo(){
     }
 }
 
-function displaycart(c){
+async function displaycart(c){
     let j=0, total =0;
-    document.getElementById("itemA").innerHTML = categories.length + "Items";
-    document.getElementById("itemB").innerHTML = categories.length + "Items";
-    if(categories.length==0){
+    var products = await get_product()
+    console.log("______________________________")
+    console.log(products)
+    document.getElementById("itemA").innerHTML = products.length + "Items";
+    document.getElementById("itemB").innerHTML = products.length + "Items";
+    if(products.length==0){
         document.getElementById("root").innerHTML="Your cart is empty";
 
         document.getElementById("totalA").innerHTML = "$ 00.00";
         document.getElementById("totalB").innerHTML = "$ 00.00";
     }
   else{
-    document.getElementById("root").innerHTML = categories.map((items)=>{
-        let {image,title,price} = items;
+    document.getElementById("root").innerHTML = products.map((items)=>{
+        let {product_ID,product_name,description,price} = items;
         total = total+price;
         document.getElementById("totalA").innerHTML = "$" + total +".00";
 
@@ -57,9 +65,9 @@ function displaycart(c){
        }
         return(
             `<tr>
-                <td width="150"><div class="img-box"><img class="img"
-            src=${image}></div></td>
-                            <td width="360"><p style='font-size:15px;'>${title}</p></td>
+                <td width="150"><div class="img-box">
+                <img class="img" src="../static/product_images/${product_name}.jpg"></div></td>
+                            <td width="360"><p style='font-size:15px;'>${product_name}</p></td>
                             <td width="150"><h2 style='font-size:15px;
             color:black;' >$ ${price}.00 </h2></td>
                             <td width="70">`+"<i class='fa-solid fa-trash'onclick='delElement("+(j++) +")'></i></td>"+
@@ -69,4 +77,20 @@ function displaycart(c){
     }).join('');
 }
 }
+async function getCart(){
+    query = `select * from cart where user_id =1;`;
+    var results = await fetchSQLResults(query);
+    return results;
+}
+async function get_product_details(productid,link){
+    const url = `${link}/details/${productid}`;
+    return fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        return data
+    });
+}
+
+getCart();
 displaycart();
+

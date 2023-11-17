@@ -1,8 +1,16 @@
 from flask import Flask, render_template,jsonify
 import requests
+import pymysql 
 app = Flask(__name__)
-server_ip = "http://10.20.203.86:5000"
+server_ip = "http://192.168.0.183:5000"
 
+connection = pymysql.connect(
+    host='localhost',
+    user='root',
+    password='Regal@301',
+    database='products',
+    cursorclass=pymysql.cursors.DictCursor 
+)
 
 @app.route('/')
 def index():
@@ -28,6 +36,17 @@ def cart_page():
 @app.route('/product/<int:id>')
 def product_page(id):
     return render_template('product.html', id=id)
+
+@app.route('/sqlquery/<query>', methods=['GET'])
+def execute_sql_query(query):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            results = cursor.fetchall()
+            return jsonify(results)
+    except Exception as e:
+        print('Error fetching data from the database:', e)
+        return jsonify({'error': 'Error fetching data from the database'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
