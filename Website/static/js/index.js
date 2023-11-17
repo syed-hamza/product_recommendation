@@ -1,6 +1,7 @@
+url = "http://192.168.0.183:5000"
 async function start() {
 
-    fetch('http://192.168.0.185:5000/products')
+    fetch(`${url}/products`)
     .then(response => response.json())
     .then(data => {
         products_data = data.products
