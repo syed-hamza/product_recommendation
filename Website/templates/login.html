@@ -39,7 +39,7 @@
       <div class="banner_bg_main">
          <!-- header top section start -->
          <div class="container">
-            <div class="header_section_top" style="margin-bottom: 150px;">
+            <div class="header_section_top" style="margin-bottom: 100px;">
                <div class="row">
                   <div class="col-sm-12">
                      <div class="custom_menu">
@@ -59,9 +59,15 @@
        
 <section class="vh-100">
     <div class="container-fluid"  style="margin-left: 17vw;">
-            <form style="width: 23rem;">
+            <form method="POST" style="width: 23rem;">
   
               <h1 class="fashion_taital">Login</h1>
+
+              {% if logged_in %}
+                  <div class="alert alert-{{alert}}" role="alert">
+                     {{ logged_in }}
+                  </div>
+               {% endif %}
   
               <div class="form-outline mb-4">
                 <input type="text" class="form-control form-control-lg" id="username" name="username" required placeholder="Username">
@@ -72,7 +78,7 @@
               </div>
   
               <div class="text-center" style="margin-bottom: 20px; margin-top: 20px;">
-                <button class="btn btn-lg btn-secondary" type="button" style="background-color: #fcafc6; border-color:#fcafc6">Login</button>
+                <button class="btn btn-lg btn-secondary" type="submit" style="background-color: #fcafc6; border-color:#fcafc6">Login</button>
               </div>
               <div class="text-center" style="font-size: 17px;">
                 <p>Don't have an account? <a href="#" style="text-decoration: none; color: #d6739f; font-size: 18px;"><span id="registertext">Register</span></a></p>
@@ -98,7 +104,7 @@
   </section>
 
       <!-- footer section start -->
-      <div class="footer_section layout_padding" style="margin-top: 150px;">
+      <div class="footer_section layout_padding" style="margin-top: 100px;">
          <div class="container">
             <div class="input_bt">
                <input type="text" class="mail_bt" placeholder="Your Email" name="Your Email">
