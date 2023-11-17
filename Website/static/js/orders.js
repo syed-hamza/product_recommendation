@@ -1,4 +1,4 @@
-function get_order_block(id,title,price){
+function get_order_block(id, title, price, status = 'Confirmed') {
     return `<tr>
                 <td>
                   <div class="product-info">
@@ -12,14 +12,14 @@ function get_order_block(id,title,price){
                     <span id="price">${price}</span>
                 </td>
                 <td>
-                    <span id="status">'Confirmed'</span>
+                    <span id="status${id}">${status}</span>
                 </td>
                 <td>
-                    <button class="cancel-button" onclick="cancelOrder(${id})">Cancel</button>
+                    <button class="cancel-button" data-id="${id}" onclick="cancelOrder(${id})">Cancel</button>
                 </td>
-              
-    </tr>`
+            </tr>`;
 }
+
 
 async function add_elements(){
     var products = await get_product()
@@ -80,3 +80,29 @@ async function fetchSQLResults(query) {
     }
   }
 add_elements()
+
+async function cancelOrder(id) {
+    try {
+        const statusElement = document.getElementById(`status${id}`);
+
+        if (!statusElement) {
+            console.error(`Status element with ID ${id} not found.`);
+            return;
+        }
+
+        // Display a form asking for the reason for cancellation
+        const reason = prompt("Please provide the reason for cancellation:");
+
+        if (reason !== null) { // User clicked 'OK' in the prompt
+            // Update the status in the HTML
+            statusElement.textContent = 'Cancelled';
+
+            // Optionally, you may want to send the cancellation information to the server
+            // using an AJAX request or other appropriate method.
+        } else {
+            // User clicked 'Cancel' in the prompt, do nothing
+        }
+    } catch (error) {
+        console.error('Error cancelling order:', error);
+    }
+}
