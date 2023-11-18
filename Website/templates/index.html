@@ -128,8 +128,14 @@
                            <div class="col-sm-12">
                               <h1 class="banner_taital">Your Favorite Designs</br>Are Here</h1>
                               <div class="buynow_bt">
-                                 <a href="/login">Login</a>
-                                 <a href="/signup">Sign Up</a></div>
+                                 {% if user_name %}
+                                 <p style="margin-top: 4px; margin-right: 10px; font-size: 18px;">Hello, {{ user_name }}!</p>
+                                 <a href="{{ url_for('logout') }}" style="height: 50px;">Logout</a>
+                             {% else %}
+                                 <a href="{{ url_for('login_page') }}">Login</a>
+                                 <a href="{{ url_for('signup_page') }}">Sign up</a>
+                             {% endif %}
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -138,8 +144,14 @@
                            <div class="col-sm-12">
                               <h1 class="banner_taital">50% Off</br>On Your First Order</h1>
                               <div class="buynow_bt">
-                                 <a href="/login">Login</a>
-                                 <a href="/signup">Sign Up</a></div>
+                                 {% if user_name %}
+                                 <p style="margin-top: 4px; margin-right: 10px; font-size: 18px;">Hello, {{ user_name }}!</p>
+                                 <a href="{{ url_for('logout') }}" style="height: 50px;">Logout</a>
+                             {% else %}
+                                 <a href="{{ url_for('login_page') }}">Login</a>
+                                 <a href="{{ url_for('signup_page') }}">Sign up</a>
+                             {% endif %}
+                              </div>
                            </div>
                            </div>
                         </div>
