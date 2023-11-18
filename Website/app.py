@@ -2,7 +2,9 @@ from flask import Flask, render_template,jsonify, request, redirect, url_for, se
 import requests
 import pymysql 
 app = Flask(__name__)
-server_ip = "http://192.168.0.184:5000"
+server_ip = "http://192.168.0.104:5000"
+
+app.secret_key = "session_key"
 
 connection = pymysql.connect(
     host='localhost',
@@ -14,10 +16,15 @@ connection = pymysql.connect(
 
 @app.route('/')
 def index():
+    if 'user_data' in session:
+        user = session['user_data']
+        user_name = user['username']
+    else: 
+        user_name = ""
     products_response = requests.get(server_ip + "/products")
     products_json = products_response.json()
     products = products_json['products']
-    return render_template('index.html', products=products)
+    return render_template('index.html', products=products, user_name=user_name)
 
 
 
@@ -32,22 +39,17 @@ def login_page():
         cursor.close()
         if user:
             session['user_data'] = user  
-            return redirect(url_for('user_dashboard'))
+            return redirect(url_for('index'))
         else:
             return redirect(url_for('login_page', alert = "danger",logged_in="Incorrect Username or Password."))
-       #if the user is already logged in
-    if 'user_data' in session:
-        return redirect(url_for('dashboard'))
+       
     logged_in = request.args.get('logged_in')
     return render_template('login.html',alert = "danger", logged_in=logged_in)
-
-#include logout button in user dashboard
-#<a style="text-decoration: none; color: red;" href="{{ url_for('logout') }}">Logout</a>
 
 @app.route('/logout')
 def logout():
     session.pop('user_data', None)  
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 @app.route('/signup')
 def signup_page():
