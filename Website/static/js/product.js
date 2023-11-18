@@ -29,6 +29,7 @@ function get_product_block(data){
             <p>${data.description}</p>
             <h3>Price: $${data.price}</h3>
             <button onclick='addtocart(event)' id="${data.product_ID}">Add to Cart</button>
+            <button class = "btn btn-danger" onclick='report(event)' id="${data.product_ID}">Report</button>
         </div>
     `;
 }
@@ -36,20 +37,23 @@ async function addtocart(event) {
     const buttonID = event.target.id;
     const query = `INSERT INTO cart (user_id, product_id) VALUES (1,${buttonID});`;
     const results = await fetchSQLResults(query);
-    console.log(results);
-
-  }
+}
+async function addtocart(event) {
+    const buttonID = event.target.id;
+    const query = `INSERT INTO reports (user_id, product_id) VALUES (1,${buttonID});`;
+    const results = await fetchSQLResults(query);
+}
   
 function get_recommended_block(data){
     return `
             <div class="recomended-product-image">
-                <img src="../static/product_images/${data.product_name}.jpg" alt="Recommended Product 1">
+                <a href = "/product/${data.product_ID}"><img src="../static/product_images/${data.product_name}.jpg" alt="Recommended Product 1"></a>
             </div>
             <div class="product-details">
                 <h2>${data.product_name}</h2>
                 <p>${data.description}</p>
                 <h3>Price: $${data.price}</h3>
-                <button id="add-to-cart-recommended-1">Add to Cart</button>
+                <button onclick='addtocart(event)' id="${data.product_ID}">Add to Cart</button>
             </div>
         `
 }

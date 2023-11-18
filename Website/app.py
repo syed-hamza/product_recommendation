@@ -2,7 +2,7 @@ from flask import Flask, render_template,jsonify, request, redirect, url_for, se
 import requests
 import pymysql 
 app = Flask(__name__)
-server_ip = "http://10.30.203.231:5000"
+server_ip = "http://192.168.0.184:5000"
 
 connection = pymysql.connect(
     host='localhost',
