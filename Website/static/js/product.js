@@ -19,8 +19,12 @@ async function geturl(){
               })
     return url
 }
+
 function get_product_block(data){
     return `
+       
+    <div style=" position: relative; left:25%; display: flex; justify-content: center; align-items: center; height: 75vh;">
+    <div class="product">
         <div class="product-image">
             <img src="../static/product_images/${data.product_name}.jpg" alt="Product Image">
         </div>
@@ -28,12 +32,21 @@ function get_product_block(data){
             <h2>${data.product_name}</h2>
             <p>${data.description}</p>
             <h3>Price: $${data.price}</h3>
-            <button onclick='addtocart(event)' id="${data.product_ID}">Add to Cart</button>
-            <button class = "btn btn-danger" onclick='report(event)' id="${data.product_ID}">Report</button>
-            <a href="/cart"><button class = "btn btn-danger">to cart</button></a>
+            <div class="button-container">
+                <button onclick='addtocart(event)' id="${data.product_ID}">Add to Cart</button>
+                <a href="/cart"><button class="btn btn-danger">Go To Cart</button></a>
+            </div>
+            <button onclick='report(event)' id="${data.product_ID}" style="background-color: red; color: white; border: none; padding: 10px; cursor: pointer;"
+                onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='red'">Report Item</button>
         </div>
+    </div>
+</div>
+
+            
     `;
 }
+
+
 async function addtocart(event) {
     const buttonID = event.target.id;
     const query = `INSERT INTO cart (user_id, product_id) VALUES (1,${buttonID});`;
@@ -109,3 +122,52 @@ async function fetchSQLResults(query) {
   }
   
 document.addEventListener('DOMContentLoaded', start);
+
+// Create a style element
+var style = document.createElement('style');
+style.type = 'text/css';
+
+// Define your CSS rules
+var css = `
+
+    .product {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 30px;
+        align-items: center;
+    }
+
+    .product-image img {
+        max-width: 100%;
+        height: auto;
+        max-height: 500px; 
+        align-items: center;
+
+    }
+
+    .product-details {
+        margin-left: 20px; 
+    }
+
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px; 
+        justify-content: space-between;
+    }
+   
+    button {
+        margin-bottom: 10px; 
+        width: 200px;
+    }
+`;
+
+// Append the CSS rules to the style element
+style.appendChild(document.createTextNode(css));
+
+// Append the style element to the head of the document
+document.head.appendChild(style);
