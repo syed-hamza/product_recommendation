@@ -2,7 +2,11 @@ from flask import Flask, render_template,jsonify, request, redirect, url_for, se
 import requests
 import pymysql 
 app = Flask(__name__)
+<<<<<<< HEAD
 server_ip = "http://172.16.21.94:5000"
+=======
+server_ip = "http://192.168.0.184:5000"
+>>>>>>> 5b3b71021a61f7732a1cc66ae894f4307d13d789
 
 app.secret_key = "session_key"
 
