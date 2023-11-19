@@ -2,14 +2,14 @@ from flask import Flask, render_template,jsonify, request, redirect, url_for, se
 import requests
 import pymysql 
 app = Flask(__name__)
-server_ip = "http://192.168.0.104:5000"
+server_ip = "http://172.16.21.94:5000"
 
 app.secret_key = "session_key"
 
 connection = pymysql.connect(
     host='localhost',
     user='root',
-    password='Regal@301',
+    password='veeru*15J69',
     database='products',
     cursorclass=pymysql.cursors.DictCursor 
 )
