@@ -30,6 +30,7 @@ function get_product_block(data){
             <h3>Price: $${data.price}</h3>
             <button onclick='addtocart(event)' id="${data.product_ID}">Add to Cart</button>
             <button class = "btn btn-danger" onclick='report(event)' id="${data.product_ID}">Report</button>
+            <a href="/cart"><button class = "btn btn-danger">to cart</button></a>
         </div>
     `;
 }
@@ -38,7 +39,7 @@ async function addtocart(event) {
     const query = `INSERT INTO cart (user_id, product_id) VALUES (1,${buttonID});`;
     const results = await fetchSQLResults(query);
 }
-async function addtocart(event) {
+async function report(event) {
     const buttonID = event.target.id;
     const query = `INSERT INTO reports (user_id, product_id) VALUES (1,${buttonID});`;
     const results = await fetchSQLResults(query);
